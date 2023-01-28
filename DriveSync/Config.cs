@@ -18,6 +18,8 @@ public class Config
 
     private string _path;
 
+    public List<Item> Items { get; set; }
+
     public Config(string path)
     {
         _path = path ?? $"/home/{Environment.GetEnvironmentVariable("USER")}{DEFAULT_PATH}";
@@ -29,7 +31,7 @@ public class Config
             throw NewTemplateException();
         }
 
-        List<Item> items = Read();
+        Items = Read();
     }
 
     void CreateTemplateFile()
