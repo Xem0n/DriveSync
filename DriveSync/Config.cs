@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json;
 
 namespace DriveSync;
 
@@ -27,6 +28,8 @@ public class Config
             
             throw NewTemplateException();
         }
+
+        List<Item> items = Read();
     }
 
     void CreateTemplateFile()
@@ -44,6 +47,14 @@ public class Config
             
             fs.Write(template, 0, template.Length);
         }
+    }
+
+    List<Item> Read()
+    {
+        string json = File.ReadAllText(_path);
+        List<Item> items = JsonSerializer.Deserialize<List<Item>>(json);
+
+        return items;
     }
 
     InvalidConfigException NewTemplateException()
