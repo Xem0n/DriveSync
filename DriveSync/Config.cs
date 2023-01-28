@@ -23,13 +23,13 @@ public class Config
 
         if (!File.Exists(_path))
         {
-            CreateTemplate();
+            CreateTemplateFile();
             
             throw NewTemplateException();
         }
     }
 
-    void CreateTemplate()
+    void CreateTemplateFile()
     {
         string directory = Path.GetDirectoryName(_path);
         
