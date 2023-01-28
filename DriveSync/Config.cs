@@ -8,9 +8,9 @@ public class Config
     private const string TEMPLATE = @"
 [
     {
-        ""local"": ""path to file on your disk"",
-        ""drive"": ""path to the file on your google drive"",
-        ""rule"": ""download/upload/sync""
+        ""Local"": ""path to file on your disk"",
+        ""Drive"": ""path to the file on your google drive"",
+        ""Rule"": ""download/upload/sync""
     }
 ]
     ";
