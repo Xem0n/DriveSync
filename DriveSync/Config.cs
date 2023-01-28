@@ -20,7 +20,7 @@ public class Config
 
     public List<Item> Items { get; set; }
 
-    public Config(string path)
+    public Config(string? path)
     {
         _path = path ?? $"/home/{Environment.GetEnvironmentVariable("USER")}{DEFAULT_PATH}";
 
@@ -36,7 +36,7 @@ public class Config
         Verify();
     }
 
-    void CreateTemplateFile()
+    private void CreateTemplateFile()
     {
         string directory = Path.GetDirectoryName(_path);
         
@@ -53,7 +53,7 @@ public class Config
         }
     }
 
-    List<Item> Read()
+    private List<Item> Read()
     {
         string json = File.ReadAllText(_path);
         List<Item> items = JsonSerializer.Deserialize<List<Item>>(json);
@@ -61,7 +61,7 @@ public class Config
         return items;
     }
 
-    void Verify()
+    private void Verify()
     {
         if (Items.Any(item => !item.IsValid()))
         {
