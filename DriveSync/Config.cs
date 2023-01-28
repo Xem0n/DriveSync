@@ -7,9 +7,11 @@ public class Config
     private const string DEFAULT_PATH = "/.config/drivesync/config.json";
     private const string TEMPLATE = @"
 [
-    ""local"": ""path to file on your disk"",
-    ""drive"": ""path to the file on your google drive"",
-    ""rule"": ""download/upload/sync""
+    {
+        ""local"": ""path to file on your disk"",
+        ""drive"": ""path to the file on your google drive"",
+        ""rule"": ""download/upload/sync""
+    }
 ]
     ";
 
