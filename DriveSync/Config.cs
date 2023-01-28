@@ -15,30 +15,30 @@ public class Config
 ]
     ";
 
+    private string _path;
+
     public Config(string path)
     {
-        path ??= $"/home/{Environment.GetEnvironmentVariable("USER")}{DEFAULT_PATH}";
+        _path = path ?? $"/home/{Environment.GetEnvironmentVariable("USER")}{DEFAULT_PATH}";
 
-        if (!File.Exists(path))
+        if (!File.Exists(_path))
         {
-            CreateTemplate(path);
+            CreateTemplate();
             
             throw NewTemplateException();
         }
-        
-        // todo: create dict of json (or sth like that, im not sure yet)
     }
 
-    void CreateTemplate(string path)
+    void CreateTemplate()
     {
-        string directory = Path.GetDirectoryName(path);
+        string directory = Path.GetDirectoryName(_path);
         
         if (!Directory.Exists(directory))
         {
             Directory.CreateDirectory(directory);
         }
 
-        using (FileStream fs = File.Create(path))
+        using (FileStream fs = File.Create(_path))
         {
             byte[] template = new UTF8Encoding(true).GetBytes(TEMPLATE);
             
