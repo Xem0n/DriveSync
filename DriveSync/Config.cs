@@ -32,6 +32,8 @@ public class Config
         }
 
         Items = Read();
+        
+        Verify();
     }
 
     void CreateTemplateFile()
@@ -57,6 +59,14 @@ public class Config
         List<Item> items = JsonSerializer.Deserialize<List<Item>>(json);
 
         return items;
+    }
+
+    void Verify()
+    {
+        if (Items.Any(item => !item.IsValid()))
+        {
+            throw new InvalidConfigException();
+        }
     }
 
     InvalidConfigException NewTemplateException()
