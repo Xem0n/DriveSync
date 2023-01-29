@@ -6,5 +6,13 @@ CommandLine.Parser.Default.ParseArguments<Options>(args)
 
 void Run(Options options)
 {
-    Config config = new(options.Config);
+    try
+    {
+        Config config = new(options.Config);
+        SyncManager manager = new(config.Items);
+    }
+    catch (Config.InvalidConfigException e)
+    {
+        Console.WriteLine(e.Message);
+    }
 }
