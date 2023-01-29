@@ -62,7 +62,10 @@ public class ItemTests
 
         if (shouldCreateLocalFile)
         {
-            File.Create(path);
+            using (FileStream fs = File.Create(path))
+            {
+                fs.Dispose();
+            }
         }
         
         return new()
