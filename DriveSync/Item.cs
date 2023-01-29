@@ -6,8 +6,40 @@ public class Item
     public string Drive { get; set; }
     public string Rule { get; set; }
 
+    private Dictionary<string, bool> _availableRules = new()
+    {
+        { "download", true },
+        { "upload", true },
+        { "sync", true }
+    };
+
     public bool IsValid()
     {
+        if (Local is null ||
+            Drive is null ||
+            Rule is null)
+        {
+            return false;
+        }
+
+        if (!_availableRules.ContainsKey(Rule))
+        {
+            return false;
+        }
+
+        if (!Directory.Exists(Path.GetDirectoryName(Local)))
+        {
+            return false;
+        }
+        
+        // todo: check Drive
+
+        if (!File.Exists(Local) &&
+            Rule == "upload")
+        {
+            return false;
+        }
+        
         return true;
     }
 }
