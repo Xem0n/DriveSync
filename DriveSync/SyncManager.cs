@@ -2,7 +2,7 @@ namespace DriveSync;
 
 public class SyncManager
 {
-    private Item[] _items;
+    private List<Item> _items;
 
-    public SyncManager(Item[] items) => _items = items;
+    public SyncManager(List<Item> items) => _items = items;
 }
