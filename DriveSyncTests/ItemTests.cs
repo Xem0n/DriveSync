@@ -34,6 +34,15 @@ public class ItemTests
     }
 
     [Test]
+    public void IsValid_NotExistingLocalPath()
+    {
+        Item item = CreateValidItem(false);
+        item.Local = "/tmp/not/existing/path/example.file";
+        
+        Assert.That(item.IsValid(), Is.False);    
+    }
+
+    [Test]
     public void IsValid_InvalidNullAnyProperty()
     {
         Item item = CreateValidItem();
