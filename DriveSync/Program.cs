@@ -8,7 +8,6 @@ async Task Run(Options options)
 {
     try
     {
-        DriveServiceFacade service = new();
         Config config = new(options.Config);
         SyncManager manager = new(config.Items);
     }
