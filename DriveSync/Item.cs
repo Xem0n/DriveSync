@@ -13,6 +13,16 @@ public class Item
         { "sync", true }
     };
 
+    public void OnDriveChanged()
+    {
+        // todo: download the file
+    }
+
+    public void OnLocalChanged(object sender, FileSystemEventArgs e)
+    {
+        // todo: upload file to drive
+    }
+
     public bool IsValid()
     {
         if (Local is null ||
