@@ -1,8 +1,8 @@
 ﻿using CommandLine;
 using DriveSync;
 
-CommandLine.Parser.Default.ParseArguments<Options>(args)
-    .WithParsed(Run);
+await Parser.Default.ParseArguments<Options>(args)
+    .WithParsedAsync(Run);
 
 void Run(Options options)
 {
