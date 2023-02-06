@@ -4,10 +4,11 @@ using DriveSync;
 await Parser.Default.ParseArguments<Options>(args)
     .WithParsedAsync(Run);
 
-void Run(Options options)
+async Task Run(Options options)
 {
     try
     {
+        DriveServiceFacade service = new();
         Config config = new(options.Config);
         SyncManager manager = new(config.Items);
     }
