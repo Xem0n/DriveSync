@@ -35,8 +35,20 @@ public class Item
         // todo: download the file
     }
 
-    public void OnLocalChanged(object sender, FileSystemEventArgs e)
+    private void OnLocalChanged(object sender, FileSystemEventArgs e)
     {
+        var now = DateTime.Now;
+        var lastWriteTime = File.GetLastWriteTime(Local);
+        
+        if (e.ChangeType != WatcherChangeTypes.Changed ||
+            now == lastWriteTime ||
+            lastWriteTime == _lastLocalRead)
+        {
+            return;
+        }
+
+        _lastLocalRead = lastWriteTime;
+        
         // todo: upload file to drive
     }
 
