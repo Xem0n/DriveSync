@@ -9,29 +9,26 @@ public class SyncManager
     {
         _items = items;
         
-        AddDriveWatch();
-        AddLocalWatch();
+        AddWatchers();
     }
 
-    private void AddDriveWatch()
+    private void AddWatchers()
     {
-        foreach (var item in GetWatchItems("download"))
+        foreach (var item in _items)
         {
-            // todo: add drive watcher
+            if (item.Rule == "upload")
+            {
+                item.AddLocalWatcher();
+            }
+            else if (item.Rule == "download")
+            {
+                item.AddDriveWatcher();
+            }
+            else
+            {
+                item.AddLocalWatcher();
+                item.AddDriveWatcher();
+            }
         }
-    }
-
-    private void AddLocalWatch()
-    {
-        foreach (var item in GetWatchItems("upload"))
-        { 
-            using var watcher = new FileSystemWatcher(item.Local);
-            watcher.Changed += item.OnLocalChanged;
-        }
-    }
-
-    private IEnumerable<Item> GetWatchItems(string rule)
-    {
-        return _items.Where(item => item.Rule == rule || item.Rule == "sync");
     }
 }

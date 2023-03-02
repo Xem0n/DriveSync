@@ -12,8 +12,25 @@ public class Item
         "upload",
         "sync"
     };
+    
+    private DateTime _lastLocalRead = DateTime.MinValue;
 
-    public void OnDriveChanged()
+    public void AddDriveWatcher()
+    {
+        
+    }
+    
+    public void AddLocalWatcher()
+    {
+        var watcher = new FileSystemWatcher(Path.GetDirectoryName(Local)!);
+        watcher.Filter = Path.GetFileName(Local);
+        watcher.EnableRaisingEvents = true;
+        watcher.Changed += OnLocalChanged;
+        
+        GC.KeepAlive(watcher);
+    }
+
+    private void OnDriveChanged()
     {
         // todo: download the file
     }
