@@ -10,6 +10,8 @@ async Task Run(Options options)
     {
         Config config = new(options.Config);
         SyncManager manager = new(config.Items);
+
+        Console.ReadLine();
     }
     catch (Config.InvalidConfigException e)
     {
