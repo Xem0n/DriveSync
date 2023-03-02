@@ -6,11 +6,11 @@ public class Item
     public string Drive { get; set; }
     public string Rule { get; set; }
 
-    private Dictionary<string, bool> _availableRules = new()
+    private HashSet<string> _availableRules = new()
     {
-        { "download", true },
-        { "upload", true },
-        { "sync", true }
+        "download",
+        "upload",
+        "sync"
     };
 
     public void OnDriveChanged()
@@ -32,7 +32,7 @@ public class Item
             return false;
         }
 
-        if (!_availableRules.ContainsKey(Rule))
+        if (!_availableRules.Contains(Rule))
         {
             return false;
         }
