@@ -2,9 +2,15 @@ namespace DriveSync;
 
 public class Item
 {
+    private DriveServiceFacade? _service;
+    
     public string LocalPath { get; set; }
     public string DriveFileId { get; set; }
     public string Rule { get; set; }
+    public DriveServiceFacade Service
+    {
+        set => _service = value;
+    }
 
     private HashSet<string> _availableRules = new()
     {
@@ -64,7 +70,13 @@ public class Item
 
     private void Upload()
     {
-        
+        var driveFile = new Google.Apis.Drive.v3.Data.File();
+        driveFile.Id = DriveFileId;
+
+        using (var file = File.OpenRead(LocalPath))
+        {
+            
+        }
     }
 
     public bool IsValid()
