@@ -15,12 +15,12 @@ public class DriveServiceFacade
         Task.Run(InitializeService).Wait();
     }
 
-    public Channel GetWatchChannel(string path)
+    public Channel GetWatchChannel(string fileId)
     {
         var channel = _service.Files.Watch(new Channel
         {
             // todo: fill it
-        }, GetFileIdFromPath(path));
+        }, fileId);
         
         return channel.Execute();
     }
