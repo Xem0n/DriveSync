@@ -37,7 +37,7 @@ public class Item
 
     private void OnLocalChanged(object sender, FileSystemEventArgs e)
     {
-        if (!isFirstTime())
+        if (!isFirstTime(e))
         {
             return;
         }
@@ -45,7 +45,7 @@ public class Item
         Upload();
     }
 
-    private bool isFirstTime()
+    private bool isFirstTime(FileSystemEventArgs e)
     {
         var now = DateTime.Now;
         var lastWriteTime = File.GetLastWriteTime(LocalPath);
