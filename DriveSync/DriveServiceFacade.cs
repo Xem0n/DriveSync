@@ -24,11 +24,6 @@ public class DriveServiceFacade
         
         return channel.Execute();
     }
-    
-    public string GetFileIdFromPath(string path)
-    {
-        return "";
-    }
 
     private async Task InitializeService()
     {
