@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.StaticFiles;
+
 namespace DriveSync;
 
 public class Item
@@ -70,12 +72,15 @@ public class Item
 
     private void Upload()
     {
+        new FileExtensionContentTypeProvider().TryGetContentType(LocalPath, out string mime);
+        
         var driveFile = new Google.Apis.Drive.v3.Data.File();
         driveFile.Id = DriveFileId;
+        driveFile.MimeType = mime;
 
         using (var file = File.OpenRead(LocalPath))
         {
-            
+            _service.UploadFile(driveFile, file);
         }
     }
 
