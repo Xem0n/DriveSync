@@ -1,5 +1,6 @@
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
+using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 
@@ -12,6 +13,21 @@ public class DriveServiceFacade
     public DriveServiceFacade()
     {
         Task.Run(InitializeService).Wait();
+    }
+
+    public Channel GetWatchChannel(string path)
+    {
+        var channel = _service.Files.Watch(new Channel
+        {
+            // todo: fill it
+        }, GetFileIdFromPath(path));
+        
+        return channel.Execute();
+    }
+    
+    public string GetFileIdFromPath(string path)
+    {
+        return "";
     }
 
     private async Task InitializeService()

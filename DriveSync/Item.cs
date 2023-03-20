@@ -15,9 +15,9 @@ public class Item
     
     private DateTime _lastLocalRead = DateTime.MinValue;
 
-    public void AddDriveWatcher()
+    public void AddDriveWatcher(DriveServiceFacade service)
     {
-        
+        var watcher = new DriveWatcher(service, Drive);
     }
     
     public void AddLocalWatcher()

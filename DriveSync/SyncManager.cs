@@ -22,12 +22,12 @@ public class SyncManager
             }
             else if (item.Rule == "download")
             {
-                item.AddDriveWatcher();
+                item.AddDriveWatcher(_service);
             }
             else
             {
                 item.AddLocalWatcher();
-                item.AddDriveWatcher();
+                item.AddDriveWatcher(_service);
             }
         }
     }
