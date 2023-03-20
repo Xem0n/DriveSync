@@ -8,27 +8,28 @@ public class SyncManager
     public SyncManager(List<Item> items)
     {
         _items = items;
-        
-        AddWatchers();
-    }
 
-    private void AddWatchers()
-    {
         foreach (var item in _items)
         {
-            if (item.Rule == "upload")
-            {
-                item.AddLocalWatcher();
-            }
-            else if (item.Rule == "download")
-            {
-                item.AddDriveWatcher(_service);
-            }
-            else
-            {
-                item.AddLocalWatcher();
-                item.AddDriveWatcher(_service);
-            }
+            item.Service = _service;
+            AddWatchers(item);
+        }
+    }
+
+    private void AddWatchers(Item item)
+    {
+        if (item.Rule == "upload")
+        {
+            item.AddLocalWatcher();
+        }
+        else if (item.Rule == "download")
+        {
+            item.AddDriveWatcher(_service);
+        }
+        else
+        {
+            item.AddLocalWatcher();
+            item.AddDriveWatcher(_service);
         }
     }
 }
