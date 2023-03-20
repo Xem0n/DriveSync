@@ -3,7 +3,7 @@ namespace DriveSync;
 public class Item
 {
     public string LocalPath { get; set; }
-    public string DrivePath { get; set; }
+    public string DriveFileId { get; set; }
     public string Rule { get; set; }
 
     private HashSet<string> _availableRules = new()
@@ -17,7 +17,7 @@ public class Item
 
     public void AddDriveWatcher(DriveServiceFacade service)
     {
-        var watcher = new DriveWatcher(service, DrivePath);
+        var watcher = new DriveWatcher(service, DriveFileId);
     }
     
     public void AddLocalWatcher()
@@ -55,7 +55,7 @@ public class Item
     public bool IsValid()
     {
         if (LocalPath is null ||
-            DrivePath is null ||
+            DriveFileId is null ||
             Rule is null)
         {
             return false;

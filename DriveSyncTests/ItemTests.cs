@@ -57,7 +57,7 @@ public class ItemTests
         Assert.That(item.IsValid(), Is.False);
 
         item.LocalPath = cache;
-        item.DrivePath = null;
+        item.DriveFileId = null;
         Assert.That(item.IsValid(), Is.False);
 
         item.Rule = null;
@@ -80,7 +80,7 @@ public class ItemTests
         return new()
         { 
             LocalPath = path,
-            DrivePath = "remote/path/to/example.file",
+            DriveFileId = "remote/path/to/example.file",
             Rule = "sync"
         };
     }
