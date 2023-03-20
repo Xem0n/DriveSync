@@ -28,7 +28,7 @@ public class ItemTests
     public void IsValid_InvalidLocalPath()
     {
         Item item = CreateValidItem(false);
-        item.Local = "invalid path";
+        item.LocalPath = "invalid path";
         
         Assert.That(item.IsValid(), Is.False);
     }
@@ -37,7 +37,7 @@ public class ItemTests
     public void IsValid_NotExistingLocalPath()
     {
         Item item = CreateValidItem(false);
-        item.Local = "/tmp/not/existing/path/example.file";
+        item.LocalPath = "/tmp/not/existing/path/example.file";
         
         Assert.That(item.IsValid(), Is.False);    
     }
@@ -52,16 +52,16 @@ public class ItemTests
         Assert.That(item.IsValid(), Is.False);
 
         item.Rule = cache;
-        cache = item.Local;
-        item.Local = null;
+        cache = item.LocalPath;
+        item.LocalPath = null;
         Assert.That(item.IsValid(), Is.False);
 
-        item.Local = cache;
-        item.Drive = null;
+        item.LocalPath = cache;
+        item.DrivePath = null;
         Assert.That(item.IsValid(), Is.False);
 
         item.Rule = null;
-        item.Local = null;
+        item.LocalPath = null;
         Assert.That(item.IsValid(), Is.False);
     }
 
@@ -79,8 +79,8 @@ public class ItemTests
         
         return new()
         { 
-            Local = path,
-            Drive = "remote/path/to/example.file",
+            LocalPath = path,
+            DrivePath = "remote/path/to/example.file",
             Rule = "sync"
         };
     }

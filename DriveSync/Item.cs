@@ -2,8 +2,8 @@ namespace DriveSync;
 
 public class Item
 {
-    public string Local { get; set; }
-    public string Drive { get; set; }
+    public string LocalPath { get; set; }
+    public string DrivePath { get; set; }
     public string Rule { get; set; }
 
     private HashSet<string> _availableRules = new()
@@ -17,13 +17,13 @@ public class Item
 
     public void AddDriveWatcher(DriveServiceFacade service)
     {
-        var watcher = new DriveWatcher(service, Drive);
+        var watcher = new DriveWatcher(service, DrivePath);
     }
     
     public void AddLocalWatcher()
     {
-        var watcher = new FileSystemWatcher(Path.GetDirectoryName(Local)!);
-        watcher.Filter = Path.GetFileName(Local);
+        var watcher = new FileSystemWatcher(Path.GetDirectoryName(LocalPath)!);
+        watcher.Filter = Path.GetFileName(LocalPath);
         watcher.EnableRaisingEvents = true;
         watcher.Changed += OnLocalChanged;
         
@@ -38,7 +38,7 @@ public class Item
     private void OnLocalChanged(object sender, FileSystemEventArgs e)
     {
         var now = DateTime.Now;
-        var lastWriteTime = File.GetLastWriteTime(Local);
+        var lastWriteTime = File.GetLastWriteTime(LocalPath);
         
         if (e.ChangeType != WatcherChangeTypes.Changed ||
             now == lastWriteTime ||
@@ -54,8 +54,8 @@ public class Item
 
     public bool IsValid()
     {
-        if (Local is null ||
-            Drive is null ||
+        if (LocalPath is null ||
+            DrivePath is null ||
             Rule is null)
         {
             return false;
@@ -66,14 +66,14 @@ public class Item
             return false;
         }
 
-        if (!Directory.Exists(Path.GetDirectoryName(Local)))
+        if (!Directory.Exists(Path.GetDirectoryName(LocalPath)))
         {
             return false;
         }
         
         // todo: check Drive
 
-        if (!File.Exists(Local) &&
+        if (!File.Exists(LocalPath) &&
             Rule == "upload")
         {
             return false;
