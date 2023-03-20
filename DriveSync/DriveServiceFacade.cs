@@ -3,6 +3,7 @@ using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using File = Google.Apis.Drive.v3.Data.File;
 
 namespace DriveSync;
 
@@ -23,6 +24,12 @@ public class DriveServiceFacade
         }, fileId);
         
         return channel.Execute();
+    }
+
+    public void UploadFile(File driveFile, FileStream file)
+    {
+        var request = _service.Files.Create(driveFile, file, driveFile.MimeType);
+        request.Upload();
     }
 
     private async Task InitializeService()
