@@ -37,6 +37,16 @@ public class Item
 
     private void OnLocalChanged(object sender, FileSystemEventArgs e)
     {
+        if (!isFirstTime())
+        {
+            return;
+        }
+       
+        Upload();
+    }
+
+    private bool isFirstTime()
+    {
         var now = DateTime.Now;
         var lastWriteTime = File.GetLastWriteTime(LocalPath);
         
@@ -44,12 +54,17 @@ public class Item
             now == lastWriteTime ||
             lastWriteTime == _lastLocalRead)
         {
-            return;
+            return false;
         }
 
         _lastLocalRead = lastWriteTime;
+
+        return true;
+    }
+
+    private void Upload()
+    {
         
-        // todo: upload file to drive
     }
 
     public bool IsValid()
