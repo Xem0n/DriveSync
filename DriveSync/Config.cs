@@ -10,7 +10,7 @@ public class Config
 [
     {
         ""Local"": ""path to file on your disk"",
-        ""Drive"": ""path to the file on your google drive"",
+        ""Drive"": ""fileId"",
         ""Rule"": ""download/upload/sync""
     }
 ]
