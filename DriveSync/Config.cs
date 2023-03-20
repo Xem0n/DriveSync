@@ -9,8 +9,8 @@ public class Config
     private const string TEMPLATE = @"
 [
     {
-        ""Local"": ""path to file on your disk"",
-        ""Drive"": ""fileId"",
+        ""LocalPath"": ""path to file on your disk"",
+        ""DriveFileId"": ""fileId"",
         ""Rule"": ""download/upload/sync""
     }
 ]
